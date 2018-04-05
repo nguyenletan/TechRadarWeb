@@ -1,0 +1,362 @@
+/*@import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";*/
+/*@import "bootstrap-sass/lib/responsive";*/
+/* Put your CSS here */
+/* line 16, main.scss */
+html, body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* line 22, main.scss */
+body {
+  background: #FAFAFA;
+  font-family: "Avenir Next", "San Francisco", "Helvetica Neue", "Open Sans", Helvetica, Arial, sans-serif;
+  color: #333;
+  font-size: 14px;
+}
+
+/* line 29, main.scss */
+.radar-manager ul {
+  list-style-type: none;
+}
+
+/* line 33, main.scss */
+.no-col-padding-right {
+  padding-right: 0;
+}
+
+/* line 37, main.scss */
+.active-tech {
+  /*font-weight: bold;*/
+  color: #FAFAFA;
+  transition: all .5s ease-in-out;
+}
+
+/* line 44, main.scss */
+.radar-movement {
+  display: inline;
+  padding: 0 4px;
+  border-radius: 2px;
+  margin-left: 3px;
+  color: #162515;
+  transition: all .7s ease-in-out;
+}
+
+/* line 53, main.scss */
+.techList-Platforms .radar-movement {
+  background-color: rgba(243, 138, 62, 0.3);
+}
+
+/* line 57, main.scss */
+.techList-FrameworksLibraries .radar-movement {
+  background-color: rgba(30, 188, 205, 0.3);
+}
+
+/* line 61, main.scss */
+.techList-Tools .radar-movement {
+  background-color: rgba(134, 183, 130, 0.3);
+}
+
+/* line 65, main.scss */
+.techList-TechniquesLanguages .radar-movement {
+  background-color: rgba(179, 32, 89, 0.3);
+}
+
+/* line 70, main.scss */
+.active-tech .radar-movement {
+  background-color: white !important;
+  color: black !important;
+  /*font-weight: bold;*/
+}
+
+/* line 76, main.scss */
+.tech-label {
+  padding: 1px 5px;
+  line-height: 1.65em;
+  border-radius: 3px;
+}
+
+/* line 83, main.scss */
+.group-Core .techList-Platforms .active-tech .tech-label {
+  background-color: #D91500;
+}
+/* line 86, main.scss */
+.group-Core .techList-FrameworksLibraries .active-tech .tech-label {
+  background-color: #006485;
+}
+/* line 90, main.scss */
+.group-Core .techList-Tools .active-tech .tech-label {
+  background-color: #246020;
+}
+/* line 94, main.scss */
+.group-Core .techList-TechniquesLanguages .active-tech .tech-label {
+  background-color: #5B000A;
+}
+
+/* line 100, main.scss */
+.group-Non-Core .techList-Platforms .active-tech .tech-label {
+  background-color: #EB4A0A;
+}
+/* line 103, main.scss */
+.group-Non-Core .techList-FrameworksLibraries .active-tech .tech-label {
+  background-color: #0089A5;
+}
+/* line 107, main.scss */
+.group-Non-Core .techList-Tools .active-tech .tech-label {
+  background-color: #458540;
+}
+/* line 111, main.scss */
+.group-Non-Core .techList-TechniquesLanguages .active-tech .tech-label {
+  background-color: #80031E;
+}
+
+/* line 117, main.scss */
+.group-Adopting .techList-Platforms .active-tech .tech-label {
+  background-color: #F38A3E;
+}
+/* line 120, main.scss */
+.group-Adopting .techList-FrameworksLibraries .active-tech .tech-label {
+  background-color: #1EBCCD;
+}
+/* line 124, main.scss */
+.group-Adopting .techList-Tools .active-tech .tech-label {
+  background-color: #86B782;
+}
+/* line 128, main.scss */
+.group-Adopting .techList-TechniquesLanguages .active-tech .tech-label {
+  background-color: #B32059;
+}
+
+/* line 133, main.scss */
+.category {
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+/* line 139, main.scss */
+.mouseover-title {
+  position: absolute;
+  color: slategrey;
+}
+
+/* line 144, main.scss */
+a {
+  color: #AAA;
+  text-decoration: none;
+}
+
+/* line 149, main.scss */
+a:hover,
+a:focus {
+  color: #333;
+  outline: none;
+}
+
+/* line 155, main.scss */
+.info {
+  color: #E57373;
+  font-weight: bold;
+  margin: 0;
+  padding: 1em;
+  display: none;
+}
+
+/* line 163, main.scss */
+.no-preserve3d .info--support {
+  display: block;
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+}
+
+/* line 170, main.scss */
+.radar-quadrant-navigation {
+  list-style-type: none !important;
+}
+
+/* line 174, main.scss */
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants {
+  display: block;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* line 182, main.scss */
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant {
+  box-sizing: border-box;
+  width: 50%;
+  padding: 0;
+  float: left;
+  text-align: center;
+  display: block;
+  vertical-align: middle;
+}
+
+/* line 192, main.scss */
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a {
+  box-sizing: border-box;
+  height: 75px;
+  color: #333;
+  display: block;
+  vertical-align: middle;
+  line-height: 1em;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: #FFF;
+  background-size: 65px 65px;
+  background-repeat: no-repeat;
+  padding: 28px 0;
+  margin: 2px;
+  transition: all .3s ease-in-out;
+  color: #333;
+  background-color: #CCC;
+}
+
+/* line 213, main.scss */
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar0 {
+  margin-top: 0px;
+  margin-right: 0;
+}
+
+/* line 218, main.scss */
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar0.selected,
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar0:active,
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar0:hover {
+  background-color: #458540;
+  color: #FAFAFA;
+}
+
+/* line 225, main.scss */
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar1 {
+  padding: 21px 0;
+  margin-bottom: 0px;
+  margin-right: 0;
+}
+
+/* line 231, main.scss */
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar1.selected,
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar1:active,
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar1:hover {
+  background-color: #80031e;
+  color: #FAFAFA;
+}
+
+/* line 238, main.scss */
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar2 {
+  margin-bottom: 0px;
+}
+
+/* line 242, main.scss */
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar2.selected,
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar2:active,
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar2:hover {
+  background-color: #eb4a0a;
+  color: #FAFAFA;
+}
+
+/* line 249, main.scss */
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar3 {
+  padding: 21px;
+  margin-top: 0px;
+}
+
+/* line 254, main.scss */
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar3.selected,
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar3:active,
+.radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar3:hover {
+  background-color: #0089a5;
+  color: #FAFAFA;
+}
+
+/* line 261, main.scss */
+.dot {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* line 266, main.scss */
+.title-wrapper {
+  margin-bottom: 20px;
+  background-color: #EEE;
+  padding-right: 0;
+}
+
+/* line 272, main.scss */
+.main-title {
+  text-align: center;
+  padding-top: 5px;
+  font-weight: 900;
+  font-size: 60px;
+  color: #333;
+  display: block;
+  margin: 40px 0;
+  text-transform: uppercase;
+  line-height: .8em;
+  border-bottom: none;
+}
+
+/* line 285, main.scss */
+.group {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+  font-size: 13px;
+}
+/* line 291, main.scss */
+.group ul {
+  -webkit-padding-start: 0;
+  -moz-padding-start: 0;
+  padding-left: 0px;
+}
+/* line 296, main.scss */
+.group ul li {
+  padding: 0 5px;
+  line-height: 1.65em;
+}
+
+/* line 303, main.scss */
+h3 {
+  line-height: 30px;
+  margin: 0;
+  color: #000;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* line 312, main.scss */
+.tech-description {
+  border-top: solid 1px #999;
+  border-bottom: solid 1px #999;
+  margin-bottom: 5px;
+  padding: 5px 0 5px 10px;
+  color: #555 !important;
+}
+/* line 318, main.scss */
+.tech-description p {
+  margin-bottom: 5px;
+}
+
+/* line 323, main.scss */
+.notes {
+  margin-bottom: 1em;
+  font-weight: 700;
+  margin-right: -30px;
+}
+
+/* line 329, main.scss */
+.note-icon {
+  background-color: #ccc;
+  border-radius: 3px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: .5em;
+}
+/* line 338, main.scss */
+.note-icon.circle-note-icon {
+  border-radius: 9px;
+}

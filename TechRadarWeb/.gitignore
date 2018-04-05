@@ -1,0 +1,13 @@
+node_modules
+dist
+.tmp
+.sass-cache
+app/bower_components
+
+# IntelliJ #
+*.iml
+*.ipr
+*.iws
+.idea/
+.DS_Store
+/app/styles/main.css
