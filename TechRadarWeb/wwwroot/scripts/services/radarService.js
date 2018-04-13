@@ -8,7 +8,6 @@ angular.module('techRadarApp').factory('radarService',
 
       function Radar(data) {
         //this.data = defaultData;
-        console.log(1);
         this.data1 = [
           {
             label: "Core",
@@ -356,14 +355,108 @@ angular.module('techRadarApp').factory('radarService',
         this.techList = [];
         this.techList2 = [];
 
+        this.HaNoiTechList = [];
+        this.SaiGonTechList = [];
+        this.HaNoiData = [];
+        this.SaiGonData = [];
+
 
         getData(this.data, this.techList);
 
-        console.log(this.data);
+
+        this.getDataByLocation = function (location) {
+
+          if (location === "HaNoi" && this.HaNoiData.length > 0) {
+            return this.HaNoiData;
+          } else if (location === "SaiGon" && this.SaiGonData.length > 0) {
+            return this.SaiGonData;
+          }
+
+          var result = $.extend(true, [], this.data); //JSON.parse(JSON.stringify(this.data));//_.clone(this.data);
+
+          if (location === undefined || location === "All") {
+            fillIndex(result);
+            return result;
+          } else {
+            //filter by location
+
+            for (let i of result) {
+
+              for (let category of i.categories) {
+
+                category.technologies = _.reject(category.technologies,
+                  function (technology) {
+                    if (location === "HaNoi") {
+                      return technology.Location === "HN";
+                    } else {
+                      return technology.Location === "HCM";
+                    }
+                  });
+                //category.technologies =[];
+              }
+
+              
+            }
+            fillIndex(result);
+            return result;
+          }
+        }
+
+        this.getTechList = function (location) {
+          if (location === "HaNoi" && this.HaNoiTechList.length > 0) {
+            return this.HaNoiTechList;
+          } else if (location === "SaiGon" && this.SaiGonTechList.length > 0) {
+            return this.SaiGonTechList;
+          }
+
+          var result = [];
+          var radarData = this.getDataByLocation(location);
+
+          function getTechListCategoryNameInner(data, groupName) {
+            var resultInner = [];
+            //var categories = _.flatten(_.pluck(data, 'categories'));
+            for (var i = 0, n = data.categories.length; i < n; i++) {
+              var temp = _.where(data.categories, { label: data.categories[i].label });
+              temp[0].group = temp.group = groupName;
+              Array.prototype.push.apply(resultInner, temp);
+
+            }
+            //resultInner.group = groupName;
+
+            /*
+             for (var i = 0, n = categories.length; i < n; i++) {
+               if (i < 4) {
+                 categories[i].group = 'Core';
+               } else if (i < 8) {
+                 categories[i].group = 'Non-Core';
+               } else {
+                 categories[i].group = 'Adopting';
+               }
+             }*/
 
 
-        //fillIndex(this.data);
-        //getTechListByCategoryName(data, this.techList);
+            return resultInner;
+          }
+
+          var coreTechList = getTechListCategoryNameInner(radarData[0], 'Core');
+
+          var nonCoreTechList = getTechListCategoryNameInner(radarData[1], 'Non-Core');
+
+          var adpotingTechList = getTechListCategoryNameInner(radarData[2], 'Adopting');
+
+          var temp1 = coreTechList.concat(nonCoreTechList);
+          var techlist = temp1.concat(adpotingTechList);
+
+          result = techlist;
+
+          return result;
+        };
+
+        this.HaNoiData  = this.getDataByLocation("HaNoi");
+        this.SaiGonData = this.getDataByLocation("SaiGoi");
+
+        this.HaNoiTechList = this.getTechList("HaNoi");
+        this.SaiGonTechList = this.getTechList("SaiGon");
       }
 
       function getData(data, techList) {
@@ -372,26 +465,7 @@ angular.module('techRadarApp').factory('radarService',
 
         if (rawData === null) return;
         mappingData(rawData, data);
-        //getTechListByCategoryName(data, techList);
-        fillIndex(data);
-        /*fetch('http://localhost:5804/api/Values',
-          {
-            method: 'get',
-            headers: {
-              "Content-Type": "text/xml"
-            },
-          }).then(function(resp) {
-          return resp.json();
-        }).then(function(resp) {
-          //techData = data;
-          //techData = _.uniq(data);
-          if (data === null) return;
-          mappingData(resp, data);
-          getTechListByCategoryName(data, techList);
-          fillIndex(data);
-          //$rootScope.$apply('radarData');
-          //console.log(data);
-        });*/
+        
       }
 
       function mappingData(serverData, chartData) {
@@ -514,7 +588,6 @@ angular.module('techRadarApp').factory('radarService',
 
       Radar.prototype.getTechnologies = function () {
         var categories = _.pluck(this.data, 'categories');
-        //console.log(categories);
         return _.flatten(_.pluck(_.flatten(categories), 'technologies'));
       };
 
@@ -525,74 +598,7 @@ angular.module('techRadarApp').factory('radarService',
         return _.pluck(categories, 'label');
       }
 
-      function getTechListByCategoryName(data, techlist) {
-        var result = [];
-
-
-        function getTechListCategoryNameInner(data, groupName) {
-          var resultInner = [];
-          //var categories = _.flatten(_.pluck(data, 'categories'));
-          for (var i = 0, n = data.categories.length; i < n; i++) {
-            var temp = _.where(data.categories, { label: data.categories[i].label });
-            temp[0].group = temp.group = groupName;
-            Array.prototype.push.apply(resultInner, temp);
-
-          }
-          //resultInner.group = groupName;
-
-          /*
-           for (var i = 0, n = categories.length; i < n; i++) {
-             if (i < 4) {
-               categories[i].group = 'Core';
-             } else if (i < 8) {
-               categories[i].group = 'Non-Core';
-             } else {
-               categories[i].group = 'Adopting';
-             }
-           }*/
-
-
-          return resultInner;
-        }
-
-        var coreTechList = getTechListCategoryNameInner(radar.data[0], 'Core');
-
-        var nonCoreTechList = getTechListCategoryNameInner(radar.data[1], 'Non-Core');
-
-        var adpotingTechList = getTechListCategoryNameInner(radar.data[2], 'Adopting');
-
-        var temp1 = coreTechList.concat(nonCoreTechList);
-        techlist = temp1.concat(adpotingTechList);
-        //techlist = coreTechList;
-
-        /*  var categories = _.flatten(_.pluck(radar.data, 'categories'));
-          console.log(categories);
-          for (var i = 0, n = categories.length; i < n; i++) {
-            var temp = _.where(categories, { label: categories[i].label });
-            Array.prototype.push.apply(result, temp);
-          }
-    
-          for (var i = 0, n = result.length; i < n; i++) {
-            result.group
-          }*/
-        //categories = _.where(categories, {label: this.categoryName});
-        //console.log(result);
-        /*
-         for (var i = 0, n = categories.length; i < n; i++) {
-           if (i < 4) {
-             categories[i].group = 'Core';
-           } else if (i < 8) {
-             categories[i].group = 'Non-Core';
-           } else {
-             categories[i].group = 'Adopting';
-           }
-         }*/
-
-        result = techlist;
-
-
-        return result;
-      }
+  
 
 
       function getStatuses() {
@@ -609,9 +615,9 @@ angular.module('techRadarApp').factory('radarService',
         categories: getCategories(),
         statuses: getStatuses(),
         groupActive: 'Frameworks & Libraries',
-        techList: getTechListByCategoryName()
+        locationActive: 'SaiGon'
+       
       };
-      //console.log(o);
       return o;
     }
   ]);

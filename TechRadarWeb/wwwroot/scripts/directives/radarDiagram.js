@@ -4,21 +4,23 @@ window.isHover = false;
 
 angular.module('techRadarApp').directive('radarDiagram',
   [
-    '$log', 'radarService', function($log, radarService) {
+    '$log', 'radarService', function ($log, radarService) {
       return {
         restrict: 'E',
         templateUrl: 'scripts/views/radar.html',
         replace: true,
-        link: function(scope, element, attrs) {
+        link: function (scope, element, attrs) {
           //console.log(scope);
 
-          function renderChart(pieNumber) {
+          function renderChart() {
+
+
 
             d3.select("svg") /*.transition().duration(500)*/.remove();
             var numCategories = 4 /*radarService.categories.length*/,
               equalPortions = [];
 
-            _(numCategories).times(function() {
+            _(numCategories).times(function () {
               equalPortions.push(100 / numCategories);
             });
 
@@ -43,6 +45,17 @@ angular.module('techRadarApp').directive('radarDiagram',
               "Platforms": categoryPie[2],
               "Frameworks & Libraries": categoryPie[3]
             };
+            var pieNumber = 3;
+
+            if (scope.groupActive === "Tools") {
+              pieNumber = 0;
+            } else if (scope.groupActive === "Techniques & Languages") {
+              pieNumber = 1;
+            } else if (scope.groupActive === "Platforms") {
+              pieNumber = 2;
+            } else if (scope.groupActive === "Frameworks & Libraries") {
+              pieNumber = 3;
+            }
 
             var renderCategoryArcIndex = 0;
 
@@ -54,26 +67,26 @@ angular.module('techRadarApp').directive('radarDiagram',
             var arcSize = 555;
             var pieWidth, pieHeight;
             switch (pieNumber) {
-            case 0:
-              pieWidth = padding;
-              pieHeight = arcSize + padding;
-              break;
-            case 1:
-              pieWidth = padding;
-              pieHeight = padding;
-              break;
-            case 2:
-              pieWidth = arcSize + padding;
-              pieHeight = padding;
-              break;
-            case 3:
-              pieWidth = arcSize + padding;
-              pieHeight = arcSize + padding;
-              break;
-            default:
-              pieWidth = width / 2 - padding;
-              pieHeight = height / 2 - padding;
-              break;
+              case 0:
+                pieWidth = padding;
+                pieHeight = arcSize + padding;
+                break;
+              case 1:
+                pieWidth = padding;
+                pieHeight = padding;
+                break;
+              case 2:
+                pieWidth = arcSize + padding;
+                pieHeight = padding;
+                break;
+              case 3:
+                pieWidth = arcSize + padding;
+                pieHeight = arcSize + padding;
+                break;
+              default:
+                pieWidth = width / 2 - padding;
+                pieHeight = height / 2 - padding;
+                break;
             }
 
             var svg = d3.select(element[0]).append("svg")
@@ -101,7 +114,7 @@ angular.module('techRadarApp').directive('radarDiagram',
 
               var foundOne = false;
               _.each(radarService.radar.getTechnologies(),
-                function(p) {
+                function (p) {
                   if (o !== p && o.x && o.y && p.x && p.y) {
                     if (Math.abs(o.x - p.x) < xThreshold && Math.abs(o.y - p.y) < yThreshold) {
                       //distance(o, p) < threshold) {
@@ -132,10 +145,12 @@ angular.module('techRadarApp').directive('radarDiagram',
               d.y = r * Math.sin(theta - (Math.PI / 2));
             }
 
-            var arcStatusEnter = svgArcs.selectAll("g").data(radarService.radar.data).enter().append("g")
+            var chartData = radarService.radar.getDataByLocation(scope.locationActive);
+            
+            var arcStatusEnter = svgArcs.selectAll("g").data(chartData).enter().append("g")
               .attr("class", "ring");
             var arcCategoryEnter = arcStatusEnter.selectAll("path")
-              .data(function(d) {
+              .data(function (d) {
                 return d.categories;
               })
               .enter()
@@ -147,34 +162,34 @@ angular.module('techRadarApp').directive('radarDiagram',
             var numRings = _.size(radarService.statuses) + 1;
             arcCategoryEnter.append("path")
               .attr("fill",
-                function(d, slice, ring) {
+              function (d, slice, ring) {
 
-                  var sliceColor = '#ffffff';
+                var sliceColor = '#ffffff';
 
-                  if (slice === pieNumber || pieNumber === undefined) {
-                    sliceColor = colorPattern[l][slice];
-                  }
-                  if (slice === numRings - 1) {
-                    l++;
-                  }
-                  return sliceColor; //colorPattern[slice];
-                })
-              .datum(function(d, i, j) {
+                if (slice === pieNumber || pieNumber === undefined) {
+                  sliceColor = colorPattern[l][slice];
+                }
+                if (slice === numRings - 1) {
+                  l++;
+                }
+                return sliceColor; //colorPattern[slice];
+              })
+              .datum(function (d, i, j) {
                 //var numRings = _.size(radarService.statuses) + 1;
                 var innerRadius, outerRadius;
                 switch (k) {
-                case 0:
-                  innerRadius = 0;
-                  outerRadius = arcSize / 1.82;
-                  break;
-                case 1:
-                  innerRadius = arcSize / 1.82;
-                  outerRadius = arcSize / 1.18;
-                  break;
-                case 2:
-                  innerRadius = arcSize / 1.18;
-                  outerRadius = arcSize;
-                  break;
+                  case 0:
+                    innerRadius = 0;
+                    outerRadius = arcSize / 1.82;
+                    break;
+                  case 1:
+                    innerRadius = arcSize / 1.82;
+                    outerRadius = arcSize / 1.18;
+                    break;
+                  case 2:
+                    innerRadius = arcSize / 1.18;
+                    outerRadius = arcSize;
+                    break;
                 }
 
                 d.arc = {
@@ -191,34 +206,33 @@ angular.module('techRadarApp').directive('radarDiagram',
                 return d;
               })
               .attr("d",
-                function(d) {
-                  return arc
-                    .innerRadius(d.arc.innerRadius).outerRadius(d.arc.outerRadius).startAngle(d.arc.startAngle)
-                    .endAngle(d.arc.endAngle)(d.arc);
-                })
+              function (d) {
+                return arc
+                  .innerRadius(d.arc.innerRadius).outerRadius(d.arc.outerRadius).startAngle(d.arc.startAngle)
+                  .endAngle(d.arc.endAngle)(d.arc);
+              })
               .on('mouseover',
-                function(d) {
-                  d.active = true;
-                  scope.redrawTechCircles();
-                })
+              function (d) {
+                d.active = true;
+                scope.redrawTechCircles();
+              })
               .on('mouseout',
-                function(d) {
-                  d.active = false;
+              function (d) {
+                d.active = false;
 
-                  scope.redrawTechCircles();
-                });
+                scope.redrawTechCircles();
+              });
 
-            var nodeStatusEnter = svgNodes.selectAll("g").data(radarService.radar.data).enter().append("g")
+            var nodeStatusEnter = svgNodes.selectAll("g").data(chartData).enter().append("g")
               .attr("class", "tech");
             var m = 0;
             var nodeCategoryEnter = nodeStatusEnter.selectAll("g")
-              .data(function(d) {
+              .data(function (d) {
                 return d.categories;
               })
               .enter()
               .append("g")
-              .datum(function(category, categoryIndex) {
-                console.log(categoryIndex);
+              .datum(function (category, categoryIndex) {
                 category.color = colorPattern[0][categoryIndex];
                 category.colors = [];
                 category.colors[0] = colorPattern[0][categoryIndex];
@@ -242,46 +256,46 @@ angular.module('techRadarApp').directive('radarDiagram',
 
             function drawTech() {
               technologies = nodeCategoryEnter.selectAll("g")
-                .data(function(d) {
-                    return d.technologies;
-                  },
-                  function(d) {
-                    return d.label;
-                  });
+                .data(function (d) {
+                  return d.technologies;
+                },
+                function (d) {
+                  return d.label;
+                });
 
               //$log.info("Redrawing");
               scope.technologies = technologies;
               var techEnter = technologies.enter().append("g").attr("class", "tech-label").attr("rel",
-                  function(d) {
-                    var $techList = $('.techList li:visible');
+                function (d) {
+                  var $techList = $('.techList li:visible');
 
-                    $techList.each(function(item) {
-                      var $this = $(this);
-                      if ($this.attr('rel') === d.label) {
-                        $this.attr('data-technology', d);
+                  $techList.each(function (item) {
+                    var $this = $(this);
+                    if ($this.attr('rel') === d.label) {
+                      $this.attr('data-technology', d);
 
-                      }
-                    });
-                    return d.label;
-                  })
-                .on('mouseover',
-                  function(d) {
-                    d.active = true;
-                    window.isHover = true;
-                    scope.redrawTechCircles();
-                  })
-                .on('mouseout',
-                  function(d) {
-                    d.active = false;
-                    window.isHover = false;
-                    scope.redrawTechCircles();
+                    }
                   });
+                  return d.label;
+                })
+                .on('mouseover',
+                function (d) {
+                  d.active = true;
+                  window.isHover = true;
+                  scope.redrawTechCircles();
+                })
+                .on('mouseout',
+                function (d) {
+                  d.active = false;
+                  window.isHover = false;
+                  scope.redrawTechCircles();
+                });
 
               //draw inner cirlce line
               techEnter.append("rect")
                 .attr("width", defaultTechSize)
                 .attr("height", defaultTechSize)
-                .datum(function(d) {
+                .datum(function (d) {
                   var parentData = d3.select(this.parentNode.parentNode).datum();
                   var j = 0;
 
@@ -300,21 +314,21 @@ angular.module('techRadarApp').directive('radarDiagram',
                 .attr("rx", 3)
                 .attr("ry", 3)
                 .attr("x",
-                  function(d) {
-                    if (d.isNew !== true) {
-                      return 100000;
-                    }
-                    return d.x - defaultTechSize / 2;
-                  }).attr("y",
-                  function(d) {
-                    if (d.isNew !== true) {
-                      return 100000;
-                    }
-                    return d.y - defaultTechSize / 2;
-                  });
+                function (d) {
+                  if (d.isNew !== true) {
+                    return 100000;
+                  }
+                  return d.x - defaultTechSize / 2;
+                }).attr("y",
+                function (d) {
+                  if (d.isNew !== true) {
+                    return 100000;
+                  }
+                  return d.y - defaultTechSize / 2;
+                });
 
               techEnter.append("circle").attr("r", defaultTechRadius)
-                .datum(function(d) {
+                .datum(function (d) {
                   if (d.isNew === true) {
                     return d;
                   }
@@ -333,30 +347,30 @@ angular.module('techRadarApp').directive('radarDiagram',
                 .style("fill", "#fff")
                 .style("opacity", "1")
                 .attr("cx",
-                  function(d) {
-                    if (d.isNew === true) {
-                      return 100000;
-                    }
-                    return d.x;
-                  }).attr("cy",
-                  function(d) {
-                    if (d.isNew === true) {
-                      return 100000;
-                    }
-                    return d.y;
-                  });
+                function (d) {
+                  if (d.isNew === true) {
+                    return 100000;
+                  }
+                  return d.x;
+                }).attr("cy",
+                function (d) {
+                  if (d.isNew === true) {
+                    return 100000;
+                  }
+                  return d.y;
+                });
               techEnter.append("text")
-                .text(function(d) {
+                .text(function (d) {
                   return (d.index + 1); //getTechLabelSubstring(d.label);
                 })
                 .attr('x',
-                  function(d) {
-                    return parseInt(d.index) > 8 ? d.x - 7 : d.x - 3;
-                  })
+                function (d) {
+                  return parseInt(d.index) > 8 ? d.x - 7 : d.x - 3;
+                })
                 .attr('y',
-                  function(d) {
-                    return d.y + 3.5;
-                  })
+                function (d) {
+                  return d.y + 3.5;
+                })
                 .attr('fill', 'black')
                 .attr('font-weight', 'bold')
                 .attr('font-size', '11px');
@@ -364,17 +378,17 @@ angular.module('techRadarApp').directive('radarDiagram',
             }
 
             scope.groupActive = radarService.groupActive;
-            scope.radarData = radarService.radar.data;
-            /*  scope.$watch('radarData', function (e) {
+            scope.radarData = chartData;
+              scope.$watch('radarData', function (e) {
                 drawTech();
-              }, true);*/
+              }, true);
 
             scope.techList = radarService.techList;
 
             drawTech();
 
             function interpolateText(string, initialLength, index) {
-              return function(t) {
+              return function (t) {
                 return t === 0
                   ? getTechLabelSubstring(string)
                   : string.substring(0, Math.round((string.length - initialLength) * t) + initialLength);
@@ -383,14 +397,14 @@ angular.module('techRadarApp').directive('radarDiagram',
             }
 
             function reverseInterpolateText(string, initialLength, index) {
-              return function(t) {
+              return function (t) {
                 var charsToRemove = t * (string.length - initialLength);
                 //return t == 1 ? getTechLabelSubstring(string) : string.substring(0, string.length - charsToRemove);
                 return index;
               };
             }
 
-            scope.redrawTechCircles = function(techs, noCallAplly) {
+            scope.redrawTechCircles = function (techs, noCallAplly) {
               if (techs === undefined) {
                 techs = technologies;
               }
@@ -409,11 +423,11 @@ angular.module('techRadarApp').directive('radarDiagram',
                               return window.isHover ? '0px' : '0px';
                             })*/
                 .style("fill",
-                  function(d) {
-                    //return d.active ? 'transparent' : 'white';
-                    //return window.isHover ? '#ccc' : 'white';
-                    return window.isHover ? d.active ? 'transparent' : '#ddd' : '#fff';
-                  });
+                function (d) {
+                  //return d.active ? 'transparent' : 'white';
+                  //return window.isHover ? '#ccc' : 'white';
+                  return window.isHover ? d.active ? 'transparent' : '#ddd' : '#fff';
+                });
 
               techs.selectAll("rect").transition()
                 .duration(100)
@@ -423,52 +437,53 @@ angular.module('techRadarApp').directive('radarDiagram',
     
                 })*/
                 .style("fill",
-                  function(d) {
-                    //return d.active ? 'transparent' : 'white';
-                    return window.isHover ? d.active ? 'transparent' : '#ddd' : '#fff';
-                    //return window.isHover ? 'transparent' : 'white';
+                function (d) {
+                  //return d.active ? 'transparent' : 'white';
+                  return window.isHover ? d.active ? 'transparent' : '#ddd' : '#fff';
+                  //return window.isHover ? 'transparent' : 'white';
 
-                  });
+                });
 
               techs.selectAll("text")
                 .style('fill',
-                  function(d) {
-                    //return d.active ? '#fafafa' : '#000';
-                    if (window.isHover) {
-                      if (d.active) {
-                        return '#FFF';
-                      }
-                      return '#aaa';
+                function (d) {
+                  //return d.active ? '#fafafa' : '#000';
+                  if (window.isHover) {
+                    if (d.active) {
+                      return '#FFF';
                     }
-                    return '#000';
-                  })
+                    return '#aaa';
+                  }
+                  return '#000';
+                })
                 .transition()
                 .duration(200)
                 .tween("text",
-                  function(d) {
-                    var node = this;
-                    var interpolationFunction = d.active ? interpolateText : reverseInterpolateText;
-                    var i = interpolationFunction(d.label,
-                      Math.min(this.textContent.length, truncatedLabelLength),
-                      d.index);
-                    return function(t) {
-                      node.textContent = d.active ? i(t) : i(t) + 1;
+                function (d) {
+                  var node = this;
+                  var interpolationFunction = d.active ? interpolateText : reverseInterpolateText;
+                  var i = interpolationFunction(d.label,
+                    Math.min(this.textContent.length, truncatedLabelLength),
+                    d.index);
+                  return function (t) {
+                    node.textContent = d.active ? i(t) : i(t) + 1;
 
-                      node.fill = 'white'; //d.active ? 'white' : 'black';
-                    };
-                  });
+                    node.fill = 'white'; //d.active ? 'white' : 'black';
+                  };
+                });
             }
 
             //window.redraw = scope.redrawTechCircles();
           }
 
-          renderChart(3);
+          renderChart();
 
           $('.radar0').on('click',
-            function(e) {
+            function (e) {
               e.preventDefault();
               e.stopPropagation();
               scope.groupActive = 'Tools';
+              radarService.groupActive = 'Tools';
               $('.radar-pie').removeClass('selected');
               $('.title').removeClass('selected');
               $('.title0').addClass('selected');
@@ -476,47 +491,86 @@ angular.module('techRadarApp').directive('radarDiagram',
               $('.techList-' + scope.groupActive.replace(' & ', '')).show();
               $(this).addClass('selected');
 
-              renderChart(0);
+              renderChart();
             });
           $('.radar1').on('click',
-            function(e) {
+            function (e) {
               e.preventDefault();
               e.stopPropagation();
               scope.groupActive = 'Techniques & Languages';
-
+              radarService.groupActive = 'Techniques & Languages';
               $('.radar-pie').removeClass('selected');
               $('.title').removeClass('selected');
               $('.title1').addClass('selected');
               $('.techList').hide();
               $('.techList-' + scope.groupActive.replace(' & ', '')).show();
               $(this).addClass('selected');
-              renderChart(1);
+              renderChart();
             });
           $('.radar2').off('click').on('click',
-            function(e) {
+            function (e) {
               e.preventDefault();
               e.stopPropagation();
               scope.groupActive = 'Platforms';
+              radarService.groupActive = 'Platforms';
               $('.radar-pie').removeClass('selected');
               $('.title').removeClass('selected');
               $('.title2').addClass('selected');
               $(this).addClass('selected');
               $('.techList').hide();
               $('.techList-' + scope.groupActive.replace(' & ', '')).show();
-              renderChart(2);
+              renderChart();
             });
           $('.radar3').off('click').on('click',
-            function(e) {
+            function (e) {
               e.preventDefault();
               e.stopPropagation();
               scope.groupActive = 'Frameworks & Libraries';
+              radarService.groupActive = 'Frameworks & Libraries';
               $('.radar-pie').removeClass('selected');
               $('.title').removeClass('selected');
               $('.title3').addClass('selected');
               $(this).addClass('selected');
               $('.techList').hide();
               $('.techList-' + scope.groupActive.replace(' & ', '')).show();
-              renderChart(3);
+              renderChart();
+            });
+
+          $('#select-SaiGon').off('click').on('click',
+            function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+              
+              $('.select-location').removeClass('selected');
+              $(this).addClass('selected');
+              scope.locationActive = "SaiGon";
+              radarService.locationActive = "SaiGon";
+              renderChart();
+            });
+
+          $('#select-HaNoi').off('click').on('click',
+            function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+              
+              $('.select-location').removeClass('selected');
+              $(this).addClass('selected');
+              scope.locationActive = "HaNoi";
+              radarService.locationActive = "HaNoi";
+              renderChart();
+            });
+
+          $('#select-all').off('click').on('click',
+            function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+
+              $('.select-location').removeClass('selected');
+              $(this).addClass('selected');
+              scope.locationActive = "All";
+              radarService.locationActive = "All";
+              renderChart();
+              //render
             });
 
           //.on('click', function(d, i){console.log(d,i);});

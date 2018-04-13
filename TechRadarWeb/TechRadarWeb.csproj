@@ -3,6 +3,12 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="app\**" />
+    <Content Remove="app\**" />
+    <EmbeddedResource Remove="app\**" />
+    <None Remove="app\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Remove="wwwroot\images\glyphicons-halflings-white.png" />
     <Content Remove="wwwroot\images\glyphicons-halflings.png" />
     <Content Remove="wwwroot\images\menu_quadrant_0--inactive.png" />
@@ -771,13 +777,10 @@
     <None Include="wwwroot\scripts\services\localStorage.js" />
     <None Include="wwwroot\scripts\services\localStorageWatcher.js" />
     <None Include="wwwroot\scripts\services\radarService.js" />
-    <None Include="wwwroot\css\main.css" />
-    <None Include="wwwroot\css\main.scss" />
     <None Include="wwwroot\scripts\views\main.html" />
     <None Include="wwwroot\scripts\views\radar.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\lib\bower_components\bootstrap-sass\assets\images\" />
-    <Folder Include="wwwroot\styles\" />
   </ItemGroup>
 </Project>

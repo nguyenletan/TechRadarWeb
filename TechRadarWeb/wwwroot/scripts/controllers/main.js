@@ -3,14 +3,16 @@
 angular.module('techRadarApp')
   .controller('MainCtrl', ['$scope', 'radarService', function ($scope, radarService) {
     $scope.radarData = radarService.radar.data;
-    $scope.radarTechList = radarService.techList;
+
     $scope.groupActive = radarService.groupActive;
+    $scope.locationActive = radarService.locationActive;
+    $scope.radarTechList = radarService.radar.getTechList(radarService.locationActive);
+
     $scope.setActive = function (status) {
       _.each($scope.radarData, function (status) { status.active = false; });
       status.active = true;
     };
 
-    console.log($scope.radarTechList);
     $scope.setActive($scope.radarData[0]);
 
     $scope.addTech = function (category, tech) {
@@ -36,7 +38,10 @@ angular.module('techRadarApp')
         });
       }
     }
-
+    $scope.$watch('locationActive', function (data) {
+      $scope.radarTechList = radarService.radar.getTechList($scope.locationActive);
+      return;
+    }, true);
 
 
     /*  $scope.$watch('groupActive' ,function(data){
