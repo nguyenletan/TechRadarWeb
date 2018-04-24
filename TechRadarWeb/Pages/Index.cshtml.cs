@@ -16,10 +16,10 @@ namespace TechRadarWeb.Pages
   {
     public void OnGet()
     {
-      List<Tech> techList;
       using (var context = new HrDwhContext())
       {
-        techList = context.TechsDbSet.FromSql("EXECUTE TCM.TMS.tcm.usp_getSkillSet").AsNoTracking().ToList();
+        context.Database.SetCommandTimeout(300);
+        var techList = context.TechsDbSet.FromSql("EXECUTE TCM.TMS.tcm.usp_getSkillSet").AsNoTracking().ToList();
         ViewData["NashTechRadarData"] = JsonConvert.SerializeObject(techList);
       }
     }
