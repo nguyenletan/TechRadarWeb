@@ -6,6 +6,7 @@ namespace TechRadarWeb.Models
   {
 
     public DbSet<Tech> TechsDbSet { get; set; }
+    public DbSet<TechDetail> DetailTechsDbSet { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
