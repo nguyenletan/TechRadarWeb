@@ -618,3 +618,8 @@ h3 {
 .resource-detail {
     font-size: .8em;
 }
+
+.dev-detail-trigger:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}

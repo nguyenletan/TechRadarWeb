@@ -5,8 +5,8 @@
             <div id="location">
                 <div id="location-inner" class="row">
                     <!--<div id="select-all" class="col-sm-4 select-location selected"><a href="javascript:void(0);">All</a></div>-->
-                    <div id="select-SaiGon" class="col-sm-6 select-location selected"><a href="javascript:void(0);">Sai Gon</a></div>
-                    <div id="select-HaNoi" class="col-sm-6 select-location"><a href="javascript:void(0);">Ha Noi</a></div>
+                    <div id="select-SaiGon" class="col-sm-6 select-location selected"><a href="javascript:void(0);">HCM</a></div>
+                    <div id="select-HaNoi" class="col-sm-6 select-location"><a href="javascript:void(0);">HN</a></div>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
     </div>
     <div class="row">
         <div class="col-sm-6 radar-manager">
-            <div class="row">
+            <div class="row" id="tech-list-wrapper">
                 <div class="col-sm-4">
                     <div class="group  group-{{ group.group }}" ng-repeat="group in radarTechList | filter: {group: 'Adopting'}">
                         <div ng-show="group.label == groupActive" class="techList techList-{{ group.label.replace(' & ', '') }}">
@@ -84,17 +84,17 @@
                                         <p class="total-bench">
                                             <span>&bullet;&nbsp;Total Bench:&nbsp;</span>{{ technology.TotalBench }}
                                             <ul class="resource-list">
-                                                <li>PSE: {{technology.DevDetail.AvailablePSE.length}}</li>
-                                                <li>SSE: {{technology.DevDetail.AvailableSSE.length}}</li>
-                                                <li>SE: {{technology.DevDetail.AvailableSE.length}}</li>
+                                                <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailablePSE}}">PSE: {{technology.DevDetail.AvailablePSE.length}}</li>
+                                                <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSSE}}">SSE: {{technology.DevDetail.AvailableSSE.length}}</li>
+                                                <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSE}}">SE: {{technology.DevDetail.AvailableSE.length}}</li>
                                             </ul>
                                         </p>
                                         <p class="TotalResoures">
                                             <span>&bullet;&nbsp;Total Resources:&nbsp;</span>{{ technology.TotalResoures }}
                                             <ul class="resource-list">
-                                                <li>PSE: {{technology.DevDetail.UnAvailablePSE.length + technology.DevDetail.AvailablePSE.length}}</li>
-                                                <li>SSE: {{technology.DevDetail.UnAvailableSSE.length + technology.DevDetail.AvailableSSE.length}}</li>
-                                                <li>SE: {{technology.DevDetail.UnAvailableSE.length + technology.DevDetail.AvailableSE.length}}</li>
+                                                <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.PSE}}">PSE: {{technology.DevDetail.UnAvailablePSE.length + technology.DevDetail.AvailablePSE.length}}</li>
+                                                <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SSE}}">SSE: {{technology.DevDetail.UnAvailableSSE.length + technology.DevDetail.AvailableSSE.length}}</li>
+                                                <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SE}}">SE: {{technology.DevDetail.UnAvailableSE.length + technology.DevDetail.AvailableSE.length}}</li>
                                             </ul>
                                         </p>
 
@@ -125,17 +125,17 @@
                                             <span>&bullet;&nbsp;Total Bench:&nbsp;</span>{{ technology.TotalBench }}
                                         </p>
                                         <ul class="resource-list">
-                                            <li>PSE: {{technology.DevDetail.AvailablePSE.length}}</li>
-                                            <li>SSE: {{technology.DevDetail.AvailableSSE.length}}</li>
-                                            <li>SE: {{technology.DevDetail.AvailableSE.length}}</li>
+                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailablePSE}}">PSE: {{technology.DevDetail.AvailablePSE.length}}</li>
+                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSSE}}">SSE: {{technology.DevDetail.AvailableSSE.length}}</li>
+                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSE}}">SE: {{technology.DevDetail.AvailableSE.length}}</li>
                                         </ul>
                                         <p class="TotalResoures">
                                             <span>&bullet;&nbsp;Total Resources:&nbsp;</span>{{ technology.TotalResoures }}
                                         </p>
                                         <ul class="resource-list">
-                                            <li>PSE: {{technology.DevDetail.UnAvailablePSE.length + technology.DevDetail.AvailablePSE.length}}</li>
-                                            <li>SSE: {{technology.DevDetail.UnAvailableSSE.length + technology.DevDetail.AvailableSSE.length}}</li>
-                                            <li>SE: {{technology.DevDetail.UnAvailableSE.length + technology.DevDetail.AvailableSE.length}}</li>
+                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.PSE}}">PSE: {{technology.DevDetail.UnAvailablePSE.length + technology.DevDetail.AvailablePSE.length}}</li>
+                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SSE}}">SSE: {{technology.DevDetail.UnAvailableSSE.length + technology.DevDetail.AvailableSSE.length}}</li>
+                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SE}}">SE: {{technology.DevDetail.UnAvailableSE.length + technology.DevDetail.AvailableSE.length}}</li>
                                         </ul>
                                     </div>
                                 </li>
@@ -161,15 +161,15 @@
                                     <div class="tech-description" ng-show="technology.showDetail">
                                         <p class="total-bench"><span>&bullet;&nbsp;Total Bench:&nbsp;</span>{{ technology.TotalBench }}</p>
                                         <ul class="resource-list">
-                                            <li>PSE: {{technology.DevDetail.AvailablePSE.length}}</li>
-                                            <li>SSE: {{technology.DevDetail.AvailableSSE.length}}</li>
-                                            <li>SE: {{technology.DevDetail.AvailableSE.length}}</li>
+                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailablePSE}}">PSE: {{technology.DevDetail.AvailablePSE.length}}</li>
+                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSSE}}">SSE: {{technology.DevDetail.AvailableSSE.length}}</li>
+                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSE}}">SE: {{technology.DevDetail.AvailableSE.length}}</li>
                                         </ul>
                                         <p class="TotalResoures"><span>&bullet;&nbsp;Total Resources:&nbsp;</span>{{ technology.TotalResoures }}</p>
                                         <ul class="resource-list">
-                                            <li>PSE: {{technology.DevDetail.UnAvailablePSE.length + technology.DevDetail.AvailablePSE.length}}</li>
-                                            <li>SSE: {{technology.DevDetail.UnAvailableSSE.length + technology.DevDetail.AvailableSSE.length}}</li>
-                                            <li>SE: {{technology.DevDetail.UnAvailableSE.length + technology.DevDetail.AvailableSE.length}}</li>
+                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.PSE}}">PSE: {{technology.DevDetail.UnAvailablePSE.length + technology.DevDetail.AvailablePSE.length}}</li>
+                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SSE}}">SSE: {{technology.DevDetail.UnAvailableSSE.length + technology.DevDetail.AvailableSSE.length}}</li>
+                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SE}}">SE: {{technology.DevDetail.UnAvailableSE.length + technology.DevDetail.AvailableSE.length}}</li>
                                         </ul>
                                     </div>
                                 </li>

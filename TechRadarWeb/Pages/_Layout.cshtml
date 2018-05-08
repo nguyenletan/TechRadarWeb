@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 </head>
 <body ng-app="techRadarApp">
-@*<div class="pace"><div class="pace-inner">Loading</div></div>*@
   @RenderBody()
 
 
@@ -20,17 +19,46 @@
 
   <div class="" ng-view="" style="width: 100%"></div>
 
+<!-- Modal -->
+<div id="dev-detail-modal" class="modal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+        <h5 class="modal-title">Staff list</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <table class="table table-sm table-striped table-hover ">
+            <thead class="thead-light">
+              <tr>
+                <td><strong>Staff Code</strong></td>
+                <td><strong>Staff Name</strong></td>
+                <td><strong>Experience</strong></td>
+                <td><strong>Is Available?</strong></td>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
 
+      </div>
+    </div>
+  </div>
+</div>
 
-  <script src="~/lib/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/popper.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
   <script src="~/lib/bower_components/angular/angular.min.js"></script>
 
   <script src="~/lib/bower_components/underscore/underscore-min.js"></script>
   <script src="~/lib/bower_components/d3/d3.min.js"></script>
-  
-  <script src="~/lib/bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
 
-  
+  <!-- <script src="~/lib/bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script> -->
+
+
   <script src="~/lib/bower_components/angular-resource/angular-resource.min.js"></script>
   <script src="~/lib/bower_components/angular-cookies/angular-cookies.min.js"></script>
   <script src="~/lib/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
