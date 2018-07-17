@@ -453,8 +453,8 @@ angular.module('techRadarApp').directive('radarDiagram', [
                   }
                   return '#000';
                 })
-              //.transition()
-              //.duration(200)
+              .transition()
+              .duration(0)
               .tween("text",
                 function (d) {
                   var node = this;

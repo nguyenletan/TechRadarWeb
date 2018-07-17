@@ -1,192 +1,192 @@
 <div class="container title-wrapper">
-    <div class="row">
-        <div class="col-sm-8 column">
-            <h1 class="main-title">Technical Radar</h1>
-            <div id="location">
-                <div id="location-inner" class="row">
-                    <!--<div id="select-all" class="col-sm-4 select-location selected"><a href="javascript:void(0);">All</a></div>-->
-                    <div id="select-SaiGon" class="col-sm-6 select-location selected"><a href="javascript:void(0);">HCM</a></div>
-                    <div id="select-HaNoi" class="col-sm-6 select-location"><a href="javascript:void(0);">HN</a></div>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-sm-8 column">
+      <h1 class="main-title">Technical Radar</h1>
+      <div id="location">
+        <div id="location-inner" class="row">
+          <!--<div id="select-all" class="col-sm-4 select-location selected"><a href="javascript:void(0);">All</a></div>-->
+          <div id="select-SaiGon" class="col-sm-6 select-location selected"><a href="javascript:void(0);">HCM</a></div>
+          <div id="select-HaNoi" class="col-sm-6 select-location"><a href="javascript:void(0);">HN</a></div>
         </div>
-        <!-- <div class="col-sm-4 column">
-       <div class=" row">
-         <div class="col-sm-8 column titles" id="radar">
-           <h2 class="title selected title3">Frameworks <br/>&amp; Libraries</h2>
-           <h2 class="title title0 short">Tools</h2>
-           <h2 class="title title1 short">Platforms</h2>
-           <h2 class="title title2">Techniques <br/>&amp; Languages</h2>
-         </div>
-         <div class=" col-sm-4 column">
-           <nav class="nav">
-             <a href="#" class="nav__item selected radar-pie radar3"><span
-               class="text-hidden">The Master Bedroom</span></a>
-             <a href="#" class="nav__item radar-pie radar0"><span class="text-hidden">The Dining Room</span></a>
-             <a href="#" class="nav__item radar-pie radar1"><span class="text-hidden">The Bathroom</span></a>
-             <a href="#" class="nav__item radar-pie radar2"><span class="text-hidden">The Office</span></a>
-           </nav>
-         </div>
-       </div>-->
-        <div class="col-sm-4 column">
-            <div class="radar-quadrant-navigation" id="radar">
-                <ul class="radar-quadrant-navigation__radar-quadrants">
-
-                    <li class="radar-quadrant-navigation__quadrant">
-                        <a class="radar-pie radar3 selected" href="javascript:void(0);">Frameworks &amp;<br> Libraries</a>
-                    </li>
-                    <li class="radar-quadrant-navigation__quadrant">
-                        <a class="radar-pie radar0" href="javascript:void(0);">Tools</a>
-                    </li>
-                    <li class="radar-quadrant-navigation__quadrant">
-                        <a class="radar-pie radar2" href="javascript:void(0);">Platforms</a>
-                    </li>
-                    <li class="radar-quadrant-navigation__quadrant">
-                        <a class="radar-pie radar1" href="javascript:void(0);">Techniques &amp;<br> Languages</a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
+      </div>
     </div>
+    <!-- <div class="col-sm-4 column">
+    <div class=" row">
+      <div class="col-sm-8 column titles" id="radar">
+        <h2 class="title selected title3">Frameworks <br/>&amp; Libraries</h2>
+        <h2 class="title title0 short">Tools</h2>
+        <h2 class="title title1 short">Platforms</h2>
+        <h2 class="title title2">Techniques <br/>&amp; Languages</h2>
+      </div>
+      <div class=" col-sm-4 column">
+        <nav class="nav">
+          <a href="#" class="nav__item selected radar-pie radar3"><span
+            class="text-hidden">The Master Bedroom</span></a>
+          <a href="#" class="nav__item radar-pie radar0"><span class="text-hidden">The Dining Room</span></a>
+          <a href="#" class="nav__item radar-pie radar1"><span class="text-hidden">The Bathroom</span></a>
+          <a href="#" class="nav__item radar-pie radar2"><span class="text-hidden">The Office</span></a>
+        </nav>
+      </div>
+    </div>-->
+    <div class="col-sm-4 column">
+      <div class="radar-quadrant-navigation" id="radar">
+        <ul class="radar-quadrant-navigation__radar-quadrants">
+
+          <li class="radar-quadrant-navigation__quadrant">
+            <a class="radar-pie radar3 selected" href="javascript:void(0);">Frameworks &amp;<br> Libraries</a>
+          </li>
+          <li class="radar-quadrant-navigation__quadrant">
+            <a class="radar-pie radar0" href="javascript:void(0);">Tools</a>
+          </li>
+          <li class="radar-quadrant-navigation__quadrant">
+            <a class="radar-pie radar2" href="javascript:void(0);">Platforms</a>
+          </li>
+          <li class="radar-quadrant-navigation__quadrant">
+            <a class="radar-pie radar1" href="javascript:void(0);">Techniques &amp;<br> Languages</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
 
 
 </div>
 
 
 <div class="container">
-    <div class="row text-right notes">
-        <div class="col-xs-4 col-sm-2 col-sm-offset-8">
-            <span class="note-icon square-note-icon">&nbsp;</span>New
-        </div>
-        <div class="col-xs-4 col-sm-2">
-            <span class="note-icon circle-note-icon">&nbsp;</span>No change
-        </div>
+  <div class="row text-right notes">
+    <div class="col-xs-4 col-sm-2 col-sm-offset-8">
+      <span class="note-icon square-note-icon">&nbsp;</span>New
     </div>
-    <div class="row">
-        <div class="col-sm-6 radar-manager">
-            <div class="row" id="tech-list-wrapper">
-                <div class="col-sm-4">
-                    <div class="group  group-{{ group.group }}" ng-repeat="group in radarTechList | filter: {group: 'Adopting'}">
-                        <div ng-show="group.label == groupActive" class="techList techList-{{ group.label.replace(' & ', '') }}">
-                            <h3 style="display: inline;">
-                                <span class="dot platforms" style="color: {{group.colors[2]}}">●</span><span class="techname"> {{group.group }}</span>
-                            </h3>
-                            <ul>
-                                <li ng-repeat="technology in group.technologies" ng-click="technology.showDetail = !technology.showDetail" ng-mouseleave="highlightTechLabel(technology, false)" ng-mouseover="highlightTechLabel(technology, true)" ng-class="{'active-tech': technology.active}"
-                                    rel="{{ technology.label }}">
-                                    <div class="tech-label">
-                                        {{technology.index + 1}}. {{ technology.label }}
-                                        <span ng-show="technology.isNew" class="radar-movement">new</span>
-                                    </div>
+    <div class="col-xs-4 col-sm-2">
+      <span class="note-icon circle-note-icon">&nbsp;</span>No change
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 radar-manager">
+      <div class="row" id="tech-list-wrapper">
+        <div class="col-sm-4">
+          <div class="group  group-{{ group.group }}" ng-repeat="group in radarTechList | filter: {group: 'Adopting'}">
+            <div ng-show="group.label == groupActive" class="techList techList-{{ group.label.replace(' & ', '') }}">
+              <h3 style="display: inline;">
+                <span class="dot platforms" style="color: {{group.colors[2]}}">●</span><span class="techname"> Assessing</span>
+              </h3>
+              <ul>
+                <li ng-repeat="technology in group.technologies" ng-click="technology.showDetail = !technology.showDetail" ng-mouseleave="highlightTechLabel(technology, false)" ng-mouseover="highlightTechLabel(technology, true)" ng-class="{'active-tech': technology.active}"
+                    rel="{{ technology.label }}" title="{{ technology.Description }}">
+                  <div class="tech-label">
+                    {{technology.index + 1}}. {{ technology.label }}
+                    <span ng-show="technology.isNew" class="radar-movement">new</span>
+                  </div>
 
-                                    <div class="tech-description" ng-show="technology.showDetail">
-                                        <p class="total-bench">
-                                            <span>&bullet;&nbsp;Total Bench:&nbsp;</span>{{ technology.TotalBench }}
-                                            <ul class="resource-list">
-                                                <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailablePSE}}">PSE: {{technology.DevDetail.AvailablePSE.length}}</li>
-                                                <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSSE}}">SSE: {{technology.DevDetail.AvailableSSE.length}}</li>
-                                                <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSE}}">SE: {{technology.DevDetail.AvailableSE.length}}</li>
-                                            </ul>
-                                        </p>
-                                        <p class="TotalResoures">
-                                            <span>&bullet;&nbsp;Total Resources:&nbsp;</span>{{ technology.TotalResoures }}
-                                            <ul class="resource-list">
-                                                <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.PSE}}">PSE: {{technology.DevDetail.UnAvailablePSE.length + technology.DevDetail.AvailablePSE.length}}</li>
-                                                <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SSE}}">SSE: {{technology.DevDetail.UnAvailableSSE.length + technology.DevDetail.AvailableSSE.length}}</li>
-                                                <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SE}}">SE: {{technology.DevDetail.UnAvailableSE.length + technology.DevDetail.AvailableSE.length}}</li>
-                                            </ul>
-                                        </p>
+                  <div class="tech-description" ng-show="technology.showDetail">
+                    <p class="total-bench">
+                      <span>&bullet;&nbsp;Total Bench:&nbsp;</span>{{ technology.TotalBench }}
+                      <ul class="resource-list">
+                        <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailablePSE}}">PSE: {{technology.DevDetail.AvailablePSE.length}}</li>
+                        <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSSE}}">SSE: {{technology.DevDetail.AvailableSSE.length}}</li>
+                        <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSE}}">SE: {{technology.DevDetail.AvailableSE.length}}</li>
+                      </ul>
+                    </p>
+                    <p class="TotalResoures">
+                      <span>&bullet;&nbsp;Total Resources:&nbsp;</span>{{ technology.TotalResoures }}
+                      <ul class="resource-list">
+                        <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.PSE}}">PSE: {{technology.DevDetail.UnAvailablePSE.length + technology.DevDetail.AvailablePSE.length}}</li>
+                        <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SSE}}">SSE: {{technology.DevDetail.UnAvailableSSE.length + technology.DevDetail.AvailableSSE.length}}</li>
+                        <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SE}}">SE: {{technology.DevDetail.UnAvailableSE.length + technology.DevDetail.AvailableSE.length}}</li>
+                      </ul>
+                    </p>
 
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-sm-4">
-                    <div class="group group-{{ group.group }}" ng-repeat="group in radarTechList | filter: {group: 'Non-Core'}">
-                        <div ng-show="group.label == groupActive" class="techList techList-{{ group.label.replace(' & ', '') }}">
-                            <h3 style="display: inline;">
-                                <span class="dot platforms" style="color: {{ group.colors[1] }}">●</span><span class="techname"> {{group.group }}</span>
-                            </h3>
-
-                            <ul>
-                                <li ng-repeat="technology in group.technologies" ng-click="technology.showDetail = !technology.showDetail" ng-mouseleave="highlightTechLabel(technology, false)" ng-mouseover="highlightTechLabel(technology, true)" ng-class="{'active-tech': technology.active}"
-                                    rel="{{ technology.label }}">
-
-                                    <div class="tech-label">
-                                        {{technology.index + 1}}. {{ technology.label }}
-                                        <span ng-show="technology.isNew" class="radar-movement">new</span>
-                                    </div>
-                                    <div class="tech-description" ng-show="technology.showDetail">
-                                        <p class="total-bench">
-                                            <span>&bullet;&nbsp;Total Bench:&nbsp;</span>{{ technology.TotalBench }}
-                                        </p>
-                                        <ul class="resource-list">
-                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailablePSE}}">PSE: {{technology.DevDetail.AvailablePSE.length}}</li>
-                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSSE}}">SSE: {{technology.DevDetail.AvailableSSE.length}}</li>
-                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSE}}">SE: {{technology.DevDetail.AvailableSE.length}}</li>
-                                        </ul>
-                                        <p class="TotalResoures">
-                                            <span>&bullet;&nbsp;Total Resources:&nbsp;</span>{{ technology.TotalResoures }}
-                                        </p>
-                                        <ul class="resource-list">
-                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.PSE}}">PSE: {{technology.DevDetail.UnAvailablePSE.length + technology.DevDetail.AvailablePSE.length}}</li>
-                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SSE}}">SSE: {{technology.DevDetail.UnAvailableSSE.length + technology.DevDetail.AvailableSSE.length}}</li>
-                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SE}}">SE: {{technology.DevDetail.UnAvailableSE.length + technology.DevDetail.AvailableSE.length}}</li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-sm-4">
-                    <div ng-show="group.group == 'Core'" class="group group-{{ group.group }}" ng-repeat="group in radarTechList | filter: {group: 'Core'}">
-                        <div ng-show="group.label == groupActive" class="techList techList-{{ group.label.replace(' & ', '') }}">
-                            <h3 style="display: inline;">
-                                <span class="dot platforms" style="color: {{group.colors[0]}}">●</span><span class="techname"> {{group.group }}</span>
-                            </h3>
-
-                            <ul>
-                                <li ng-repeat="technology in group.technologies" ng-click="technology.showDetail = !technology.showDetail" ng-mouseleave="highlightTechLabel(technology, false)" ng-mouseover="highlightTechLabel(technology, true)" ng-class="{'active-tech': technology.active}"
-                                    rel="{{ technology.label }}">
-                                    <div class="tech-label">
-                                        {{technology.index + 1}}. {{ technology.label }}
-                                        <span ng-show="technology.isNew" class="radar-movement">new</span>
-                                    </div>
-                                    <div class="tech-description" ng-show="technology.showDetail">
-                                        <p class="total-bench"><span>&bullet;&nbsp;Total Bench:&nbsp;</span>{{ technology.TotalBench }}</p>
-                                        <ul class="resource-list">
-                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailablePSE}}">PSE: {{technology.DevDetail.AvailablePSE.length}}</li>
-                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSSE}}">SSE: {{technology.DevDetail.AvailableSSE.length}}</li>
-                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSE}}">SE: {{technology.DevDetail.AvailableSE.length}}</li>
-                                        </ul>
-                                        <p class="TotalResoures"><span>&bullet;&nbsp;Total Resources:&nbsp;</span>{{ technology.TotalResoures }}</p>
-                                        <ul class="resource-list">
-                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.PSE}}">PSE: {{technology.DevDetail.UnAvailablePSE.length + technology.DevDetail.AvailablePSE.length}}</li>
-                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SSE}}">SSE: {{technology.DevDetail.UnAvailableSSE.length + technology.DevDetail.AvailableSSE.length}}</li>
-                                            <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SE}}">SE: {{technology.DevDetail.UnAvailableSE.length + technology.DevDetail.AvailableSE.length}}</li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
+                  </div>
+                </li>
+              </ul>
             </div>
+          </div>
 
         </div>
-        <div class="col-sm-6 no-col-padding-right" style="text-align: right;">
-            <!--  <span class="mouseover-title">
-            <h3>{{activeCategory.label}}</h3>
-            <h4>{{activeStatus.label}}</h4>
-        </span>-->
-            <radar-diagram height="555" width="555" />
+        <div class="col-sm-4">
+          <div class="group group-{{ group.group }}" ng-repeat="group in radarTechList | filter: {group: 'Non-Core'}">
+            <div ng-show="group.label == groupActive" class="techList techList-{{ group.label.replace(' & ', '') }}">
+              <h3 style="display: inline;">
+                <span class="dot platforms" style="color: {{ group.colors[1] }}">●</span><span class="techname"> {{group.group }}</span>
+              </h3>
+
+              <ul>
+                <li ng-repeat="technology in group.technologies" ng-click="technology.showDetail = !technology.showDetail" ng-mouseleave="highlightTechLabel(technology, false)" ng-mouseover="highlightTechLabel(technology, true)" ng-class="{'active-tech': technology.active}"
+                    rel="{{ technology.label }}" title="{{ technology.Description }}">
+
+                  <div class="tech-label">
+                    {{technology.index + 1}}. {{ technology.label }}
+                    <span ng-show="technology.isNew" class="radar-movement">new</span>
+                  </div>
+                  <div class="tech-description" ng-show="technology.showDetail">
+                    <p class="total-bench">
+                      <span>&bullet;&nbsp;Total Bench:&nbsp;</span>{{ technology.TotalBench }}
+                    </p>
+                    <ul class="resource-list">
+                      <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailablePSE}}">PSE: {{technology.DevDetail.AvailablePSE.length}}</li>
+                      <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSSE}}">SSE: {{technology.DevDetail.AvailableSSE.length}}</li>
+                      <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSE}}">SE: {{technology.DevDetail.AvailableSE.length}}</li>
+                    </ul>
+                    <p class="TotalResoures">
+                      <span>&bullet;&nbsp;Total Resources:&nbsp;</span>{{ technology.TotalResoures }}
+                    </p>
+                    <ul class="resource-list">
+                      <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.PSE}}">PSE: {{technology.DevDetail.UnAvailablePSE.length + technology.DevDetail.AvailablePSE.length}}</li>
+                      <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SSE}}">SSE: {{technology.DevDetail.UnAvailableSSE.length + technology.DevDetail.AvailableSSE.length}}</li>
+                      <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SE}}">SE: {{technology.DevDetail.UnAvailableSE.length + technology.DevDetail.AvailableSE.length}}</li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
         </div>
+        <div class="col-sm-4">
+          <div ng-show="group.group == 'Core'" class="group group-{{ group.group }}" ng-repeat="group in radarTechList | filter: {group: 'Core'}">
+            <div ng-show="group.label == groupActive" class="techList techList-{{ group.label.replace(' & ', '') }}">
+              <h3 style="display: inline;">
+                <span class="dot platforms" style="color: {{group.colors[0]}}">●</span><span class="techname"> {{group.group }}</span>
+              </h3>
+
+              <ul>
+                <li ng-repeat="technology in group.technologies" ng-click="technology.showDetail = !technology.showDetail" ng-mouseleave="highlightTechLabel(technology, false)" ng-mouseover="highlightTechLabel(technology, true)" ng-class="{'active-tech': technology.active}"
+                    rel="{{ technology.label }}" title="{{ technology.Description }}">
+                  <div class="tech-label">
+                    {{technology.index + 1}}. {{ technology.label }}
+                    <span ng-show="technology.isNew" class="radar-movement">new</span>
+                  </div>
+                  <div class="tech-description" ng-show="technology.showDetail">
+                    <p class="total-bench"><span>&bullet;&nbsp;Total Bench:&nbsp;</span>{{ technology.TotalBench }}</p>
+                    <ul class="resource-list">
+                      <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailablePSE}}">PSE: {{technology.DevDetail.AvailablePSE.length}}</li>
+                      <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSSE}}">SSE: {{technology.DevDetail.AvailableSSE.length}}</li>
+                      <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.AvailableSE}}">SE: {{technology.DevDetail.AvailableSE.length}}</li>
+                    </ul>
+                    <p class="TotalResoures"><span>&bullet;&nbsp;Total Resources:&nbsp;</span>{{ technology.TotalResoures }}</p>
+                    <ul class="resource-list">
+                      <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.PSE}}">PSE: {{technology.DevDetail.UnAvailablePSE.length + technology.DevDetail.AvailablePSE.length}}</li>
+                      <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SSE}}">SSE: {{technology.DevDetail.UnAvailableSSE.length + technology.DevDetail.AvailableSSE.length}}</li>
+                      <li class="dev-detail-trigger" data-dev-detail="{{technology.DevDetail.SE}}">SE: {{technology.DevDetail.UnAvailableSE.length + technology.DevDetail.AvailableSE.length}}</li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
+    <div class="col-sm-6 no-col-padding-right" style="text-align: right;">
+      <!--  <span class="mouseover-title">
+          <h3>{{activeCategory.label}}</h3>
+          <h4>{{activeStatus.label}}</h4>
+      </span>-->
+      <radar-diagram height="555" width="555" />
+    </div>
+  </div>
 </div>
