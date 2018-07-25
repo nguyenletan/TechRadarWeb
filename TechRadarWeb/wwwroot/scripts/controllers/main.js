@@ -66,8 +66,9 @@ angular.module('techRadarApp')
     };
 
     $scope.highlightTechLabel = function (tech, isHighlight) {
-      if (tech !== undefined && isHighlight !== undefined) {
+      if (tech !== undefined && isHighlight !== undefined && $scope.technologies !== undefined) {
         tech.active = isHighlight;
+
         $scope.technologies.each(function (d) {
           if (d.label === tech.label) {
             d.active = isHighlight;

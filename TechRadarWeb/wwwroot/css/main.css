@@ -21,9 +21,9 @@ body {
 
 body {
     background: #FAFAFA;
-    font-family: "Avenir Next", "San Francisco", "Helvetica Neue", "Open Sans", Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
     color: #333;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .pace {
@@ -59,7 +59,7 @@ body {
     display: block;
     border-width: 30px;
     border-style: double;
-    border-color: #000000 transparent transparent;
+    border-color: #333 transparent transparent;
     border-radius: 50%;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
@@ -80,7 +80,7 @@ body {
     display: block;
     border-width: 10px;
     border-style: solid;
-    border-color: #000000 transparent transparent;
+    border-color: #333 transparent transparent;
     border-radius: 50%;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
@@ -130,7 +130,7 @@ body {
 
 .active-tech {
     /*font-weight: bold;*/
-    color: #FAFAFA;
+    color: #EEF0F4;
     /*transition: all .5s ease-in-out;*/
 }
 
@@ -143,8 +143,30 @@ body {
     border-radius: 2px;
     margin-left: 3px;
     color: #162515;
-    transition: all .7s ease-in-out;
 }
+
+.radar-investing {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-radius: 4px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 10px solid #8EB63E;
+}
+
+.radar-legacy {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-radius: 4px;
+  border-left: 8x solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid #C02134;
+
+}
+
+
 
 #location {
     font-size: 16px;
@@ -179,9 +201,9 @@ body {
     /*color: #ffffff;
 
   background-color: rgba(0, 0, 0, 0.7);*/
-    background-color: #ccc;
+    background-color: #C9CFD9;
     font-weight: bold;
-    color: #000;
+    color: #333;
 }
 
 
@@ -216,8 +238,8 @@ body {
 /* line 70, main.scss */
 
 .active-tech .radar-movement {
-    background-color: white !important;
-    color: black !important;
+    background-color: #EEF0F4 !important;
+    color: #333 !important;
     /*font-weight: bold;*/
 }
 
@@ -225,7 +247,7 @@ body {
 /* line 76, main.scss */
 
 .tech-label {
-    padding: 1px 5px;
+    padding: 1px 0;
     line-height: 1.65em;
     border-radius: 3px;
 }
@@ -234,84 +256,89 @@ body {
 /* line 83, main.scss */
 
 .group-Core .techList-Platforms .active-tech .tech-label {
-    background-color: #D91500;
+    background-color: #8FB53D;
 }
 
 
 /* line 86, main.scss */
 
 .group-Core .techList-FrameworksLibraries .active-tech .tech-label {
-    background-color: #006485;
+    background-color: #C02134;
 }
 
 
 /* line 90, main.scss */
 
 .group-Core .techList-Tools .active-tech .tech-label {
-    background-color: #246020;
+    background-color: #7eb5d0;
 }
 
 
 /* line 94, main.scss */
 
 .group-Core .techList-TechniquesLanguages .active-tech .tech-label {
-    background-color: #5B000A;
+    background-color: #6B5189;
 }
 
 
 /* line 100, main.scss */
 
 .group-Non-Core .techList-Platforms .active-tech .tech-label {
-    background-color: #EB4A0A;
+    background-color: #ABC473;
 }
 
 
 /* line 103, main.scss */
 
 .group-Non-Core .techList-FrameworksLibraries .active-tech .tech-label {
-    background-color: #0089A5;
+    /* background-color: #0089A5; */
+    background-color: #DB6673;
+
 }
 
 
 /* line 107, main.scss */
 
 .group-Non-Core .techList-Tools .active-tech .tech-label {
-    background-color: #458540;
+    /* background-color: #458540;  */
+    background-color: #A1C7DB
 }
 
 
 /* line 111, main.scss */
 
 .group-Non-Core .techList-TechniquesLanguages .active-tech .tech-label {
-    background-color: #80031E;
+    /* background-color: #80031E; */
+    background: #8C7AA3;
 }
 
 
 /* line 117, main.scss */
 
 .group-Adopting .techList-Platforms .active-tech .tech-label {
-    background-color: #F38A3E;
+    /* background-color: #F38A3E; */
+    background-color: #D6E0BA;
 }
 
 
 /* line 120, main.scss */
 
 .group-Adopting .techList-FrameworksLibraries .active-tech .tech-label {
-    background-color: #1EBCCD;
+    background-color: #EBA6B0;
 }
 
 
 /* line 124, main.scss */
 
 .group-Adopting .techList-Tools .active-tech .tech-label {
-    background-color: #86B782;
+    background-color: #D4E3ED;
 }
 
 
 /* line 128, main.scss */
 
 .group-Adopting .techList-TechniquesLanguages .active-tech .tech-label {
-    background-color: #B32059;
+    background-color: #C4BAD1;
 }
 
 
@@ -407,17 +434,17 @@ a:focus {
     color: #333;
     display: block;
     vertical-align: middle;
-    line-height: 1em;
-    font-weight: 700;
-    font-size: 16px;
-    background-color: #FFF;
+    line-height: 1.25em;
+    font-weight: 600;
+    font-size: 14px;
+    /* background-color: #EEF0F4; */
     background-size: 65px 65px;
     background-repeat: no-repeat;
     padding: 28px 0;
     margin: 2px;
     transition: all .3s ease-in-out;
     color: #333;
-    background-color: #CCC;
+    background-color: #C9CFD9;
 }
 
 
@@ -434,8 +461,8 @@ a:focus {
 .radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar0.selected,
 .radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar0:active,
 .radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar0:hover {
-    background-color: #458540;
-    color: #FAFAFA;
+    background-color: #7EB5D0;
+    color: #EEF0F4;
 }
 
 
@@ -453,8 +480,9 @@ a:focus {
 .radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar1.selected,
 .radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar1:active,
 .radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar1:hover {
-    background-color: #80031e;
-    color: #FAFAFA;
+    background-color: #6B5189;
+
+    color: #EEF0F4;
 }
 
 
@@ -470,8 +498,8 @@ a:focus {
 .radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar2.selected,
 .radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar2:active,
 .radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar2:hover {
-    background-color: #eb4a0a;
-    color: #FAFAFA;
+    background-color: #8EB63E;
+    color: #EEF0F4;
 }
 
 
@@ -488,8 +516,8 @@ a:focus {
 .radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar3.selected,
 .radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar3:active,
 .radar-quadrant-navigation .radar-quadrant-navigation__radar-quadrants .radar-quadrant-navigation__quadrant a.radar3:hover {
-    background-color: #0089a5;
-    color: #FAFAFA;
+    background-color: #CC2337;
+    color: #EEF0F4;
 }
 
 
@@ -497,7 +525,7 @@ a:focus {
 
 .dot {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 
@@ -505,7 +533,7 @@ a:focus {
 
 .title-wrapper {
     margin-bottom: 20px;
-    background-color: #EEE;
+    background-color: #EEF0F4;
     padding-right: 0;
 }
 
@@ -515,13 +543,13 @@ a:focus {
 .main-title {
     text-align: center;
     padding-top: 5px;
-    font-weight: 900;
-    font-size: 60px;
+    font-weight: 600;
+    font-size: 50px;
     color: #333;
     display: block;
-    margin: 30px 0;
+    margin: 40px 0;
     text-transform: uppercase;
-    line-height: .8em;
+    line-height: .6em;
     border-bottom: none;
 }
 
@@ -531,9 +559,9 @@ a:focus {
 .group {
     display: block;
     text-decoration: none;
-    color: #000;
+    color: #333;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 
@@ -549,7 +577,7 @@ a:focus {
 /* line 296, main.scss */
 
 .group ul li {
-    padding: 0 5px;
+    padding: 0;
     line-height: 1.65em;
 }
 
@@ -559,9 +587,9 @@ a:focus {
 h3 {
     line-height: 30px;
     margin: 0;
-    color: #000;
-    font-size: 14px;
-    font-weight: 700;
+    color: #333;
+    font-size: 13px;
+    font-weight: 600;
     text-transform: uppercase;
 }
 
@@ -588,7 +616,7 @@ h3 {
 
 .notes {
     margin-bottom: 1em;
-    font-weight: 700;
+    font-weight: 600;
     margin-right: -30px;
 }
 
@@ -596,10 +624,7 @@ h3 {
 /* line 329, main.scss */
 
 .note-icon {
-    background-color: #ccc;
-    border-radius: 3px;
-    width: 20px;
-    height: 20px;
+    border-radius: 5px;
     display: inline-block;
     margin-right: .5em;
 }
@@ -610,6 +635,21 @@ h3 {
 .note-icon.circle-note-icon {
     border-radius: 9px;
 }
+
+.note-icon.arrow-up {
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 15px solid #8EB63E;
+}
+
+
+
+.note-icon.arrow-down {
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 15px solid #C02134;
+}
+
 
 .resource-list {
     margin-left: 5px;

@@ -3,25 +3,30 @@ angular.module('techRadarApp').factory('radarService', [
   function ($log, $rootScope, $timeout, localStorageWatcher) {
 
     var LOCAL_STORAGE_ID = 'sadc.technologyRadarData';
-    categoryName = 'Frameworks & Libraries';
+    var categoryName = 'Frameworks & Libraries';
 
     function Radar(data) {
 
       this.detailData = [];
 
       this.data = [{
-        "label": "Core",
-        categories: []
-      },
-      {
-        "label": "Non-Core",
-        categories: []
-      },
-      {
-        "label": "Adopting",
-        categories: []
-      }
+          "label": "Core",
+          categories: []
+        },
+        {
+          "label": "Non-Core",
+          categories: []
+        },
+        {
+          "label": "Assessing",
+          categories: []
+        },
+        {
+          "label": "Adopting",
+          categories: []
+        }
       ];
+
       this.techList = [];
       this.techList2 = [];
 
@@ -64,12 +69,34 @@ angular.module('techRadarApp').factory('radarService', [
                 });
               //category.technologies =[];
             }
-
-
           }
-          fillIndex(result);
+
+          // fillIndex(result);
           return result;
         }
+      }
+
+      this.getDataByLocationForOutter = function (location) {
+        var result = this.getDataByLocation(location);
+        var adoptingData = result[3];
+        result = _.without(result, result[3]);
+
+        for (let i = 0; i < adoptingData.categories.length; i++) {
+          if (adoptingData.categories[i].label === 'Tools') {
+            result[1].categories[0].technologies = _.union(result[1].categories[0].technologies, adoptingData.categories[i].technologies);
+          }
+          if (adoptingData.categories[i].label === 'Techniques & Languages') {
+            result[1].categories[1].technologies = _.union(result[1].categories[1].technologies, adoptingData.categories[i].technologies);
+          }
+          if (adoptingData.categories[i].label === 'Platforms') {
+            result[1].categories[2].technologies = _.union(result[1].categories[2].technologies, adoptingData.categories[i].technologies);
+          }
+          if (adoptingData.categories[i].label === 'Frameworks & Libraries') {
+            result[1].categories[3].technologies = _.union(result[1].categories[3].technologies, adoptingData.categories[i].technologies);
+          }
+        }
+        fillIndex(result);
+        return result;
       }
 
       this.getTechList = function (location) {
@@ -142,7 +169,9 @@ angular.module('techRadarApp').factory('radarService', [
           var resultInner = [];
           //var categories = _.flatten(_.pluck(data, 'categories'));
           for (var i = 0, n = data.categories.length; i < n; i++) {
-            var temp = _.where(data.categories, { label: data.categories[i].label });
+            var temp = _.where(data.categories, {
+              label: data.categories[i].label
+            });
             temp[0].group = temp.group = groupName;
 
             for (var j = 0; j < temp[0].technologies.length; j++) {
@@ -172,10 +201,13 @@ angular.module('techRadarApp').factory('radarService', [
 
         var nonCoreTechList = getTechListCategoryNameInner(radarData[1], 'Non-Core');
 
-        var adpotingTechList = getTechListCategoryNameInner(radarData[2], 'Adopting');
+        var assessingTechList = getTechListCategoryNameInner(radarData[2], 'Assessing');
+
+        var adpotingTechList = getTechListCategoryNameInner(radarData[3], 'Adopting');
 
         var temp1 = coreTechList.concat(nonCoreTechList);
-        var techlist = temp1.concat(adpotingTechList);
+        var techlist = temp1.concat(assessingTechList);
+        techlist = techlist.concat(adpotingTechList);
 
         result = techlist;
 
@@ -227,32 +259,90 @@ angular.module('techRadarApp').factory('radarService', [
         });
       addMissingFields(nonCoreList, 'Non-Core');
 
+      var assessingList = _.groupBy(temp.Assessing,
+        function (c) {
+          return c.NashTechCategory;
+        });
+      addMissingFields(assessingList, 'Assessing');
+
       var adoptingList = _.groupBy(temp.Adopting,
         function (c) {
           return c.NashTechCategory;
         });
+      console.log(adoptingList);
       addMissingFields(adoptingList, 'Adopting');
 
 
-      chartData[0].categories = [
-        { label: "Tools", technologies: [] },
-        { label: "Techniques & Languages", technologies: [] },
-        { label: "Platforms", technologies: [] },
-        { label: "Frameworks & Libraries", technologies: [] }
+      chartData[0].categories = [{
+          label: "Tools",
+          technologies: []
+        },
+        {
+          label: "Techniques & Languages",
+          technologies: []
+        },
+        {
+          label: "Platforms",
+          technologies: []
+        },
+        {
+          label: "Frameworks & Libraries",
+          technologies: []
+        }
       ];
 
-      chartData[1].categories = [
-        { label: "Tools", technologies: [] },
-        { label: "Techniques & Languages", technologies: [] },
-        { label: "Platforms", technologies: [] },
-        { label: "Frameworks & Libraries", technologies: [] }
+      chartData[1].categories = [{
+          label: "Tools",
+          technologies: []
+        },
+        {
+          label: "Techniques & Languages",
+          technologies: []
+        },
+        {
+          label: "Platforms",
+          technologies: []
+        },
+        {
+          label: "Frameworks & Libraries",
+          technologies: []
+        }
       ];
 
-      chartData[2].categories = [
-        { label: "Tools", technologies: [] },
-        { label: "Techniques & Languages", technologies: [] },
-        { label: "Platforms", technologies: [] },
-        { label: "Frameworks & Libraries", technologies: [] }
+      chartData[2].categories = [{
+          label: "Tools",
+          technologies: []
+        },
+        {
+          label: "Techniques & Languages",
+          technologies: []
+        },
+        {
+          label: "Platforms",
+          technologies: []
+        },
+        {
+          label: "Frameworks & Libraries",
+          technologies: []
+        }
+      ];
+
+      chartData[3].categories = [{
+          label: "Tools",
+          technologies: []
+        },
+        {
+          label: "Techniques & Languages",
+          technologies: []
+        },
+        {
+          label: "Platforms",
+          technologies: []
+        },
+        {
+          label: "Frameworks & Libraries",
+          technologies: []
+        }
       ];
 
       chartData[0].categories[0].technologies = Object.values(coreList['Tools']);
@@ -267,42 +357,77 @@ angular.module('techRadarApp').factory('radarService', [
       chartData[1].categories[3].technologies = Object.values(nonCoreList['Frameworks & Libraries']);
       chartData[1].categories.group = 'Non-Core';
 
-      chartData[2].categories[0].technologies = Object.values(adoptingList['Tools']);
-      chartData[2].categories[1].technologies = Object.values(adoptingList['Techniques & Languages']);
-      chartData[2].categories[2].technologies = Object.values(adoptingList['Platforms']);
-      chartData[2].categories[3].technologies = Object.values(adoptingList['Frameworks & Libraries']);
-      chartData[2].categories.group = 'Adopting';
+
+      if (assessingList['Tools'] !== undefined) {
+        chartData[2].categories[0].technologies = Object.values(assessingList['Tools']);
+        chartData[2].categories[1].technologies = Object.values(assessingList['Techniques & Languages']);
+        chartData[2].categories[2].technologies = Object.values(assessingList['Platforms']);
+        chartData[2].categories[3].technologies = Object.values(assessingList['Frameworks & Libraries']);
+      }
+      chartData[2].categories.group = 'Assessing';
+
+
+      chartData[3].categories[0].technologies = Object.values(adoptingList['Tools']);
+      chartData[3].categories[1].technologies = Object.values(adoptingList['Techniques & Languages']);
+      chartData[3].categories[2].technologies = Object.values(adoptingList['Platforms']);
+      chartData[3].categories[3].technologies = Object.values(adoptingList['Frameworks & Libraries']);
+      chartData[3].categories.group = 'Adopting';
     }
 
     function addMissingFields(data, groupName) {
+      console.log(`groupName: ${groupName}`);
       var i;
+      if (data['Frameworks & Libraries'] === undefined) {
+        data['Frameworks & Libraries'] = [];
+      }
       for (i = 0; i < data['Frameworks & Libraries'].length; i++) {
         data['Frameworks & Libraries'][i].label = data['Frameworks & Libraries'][i].Name;
         data['Frameworks & Libraries'][i].isNew = false;
+        if(groupName === 'Adopting'){
+          data['Frameworks & Libraries'][i].isAdopting = true;
+        }
         if (groupName !== undefined) {
           data['Frameworks & Libraries'][i].group = groupName;
         }
       }
 
+      if (data['Tools'] === undefined) {
+        data['Tools'] = [];
+      }
       for (i = 0; i < data['Tools'].length; i++) {
         data['Tools'][i].label = data['Tools'][i].Name;
         data['Tools'][i].isNew = false;
+        if(groupName === 'Adopting'){
+          data['Tools'][i].isAdopting = true;
+        }
         if (groupName !== undefined) {
           data['Tools'][i].group = groupName;
         }
       }
 
+      if (data['Platforms'] === undefined) {
+        data['Platforms'] = [];
+      }
       for (i = 0; i < data['Platforms'].length; i++) {
         data['Platforms'][i].label = data['Platforms'][i].Name;
         data['Platforms'][i].isNew = false;
+        if(groupName === 'Adopting'){
+          data['Platforms'][i].isAdopting = true;
+        }
         if (groupName !== undefined) {
           data['Platforms'][i].group = groupName;
         }
       }
 
+      if (data['Techniques & Languages'] === undefined) {
+        data['Techniques & Languages'] = [];
+      }
       for (i = 0; i < data['Techniques & Languages'].length; i++) {
         data['Techniques & Languages'][i].label = data['Techniques & Languages'][i].Name;
         data['Techniques & Languages'][i].isNew = false;
+        if(groupName === 'Adopting'){
+          data['Techniques & Languages'][i].isAdopting = true;
+        }
         if (groupName !== undefined) {
           data['Techniques & Languages'][i].group = groupName;
         }
@@ -337,10 +462,8 @@ angular.module('techRadarApp').factory('radarService', [
       return _.pluck(categories, 'label');
     }
 
-
-
-
     function getStatuses() {
+      console.log(radar.data);
       return _.pluck(radar.data, 'label');
     }
 
